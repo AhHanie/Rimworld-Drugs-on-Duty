@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+    <DrugsonDuty.LoadingLabel>Drugs on Duty Loading</DrugsonDuty.LoadingLabel>
+    <DrugsonDuty.SettingsTitle>Drugs on Duty</DrugsonDuty.SettingsTitle>
+    <DrugsonDuty.SettingsList.Header>Take during Work hours (unchecked drugs keep vanilla behavior):</DrugsonDuty.SettingsList.Header>
+    <DrugsonDuty.SettingsList.DisableAll>Disable All</DrugsonDuty.SettingsList.DisableAll>
+    <DrugsonDuty.SettingsList.ResetToDefaults>Reset to Defaults</DrugsonDuty.SettingsList.ResetToDefaults>
+</LanguageData>
