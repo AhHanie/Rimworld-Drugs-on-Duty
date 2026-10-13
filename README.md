@@ -8,14 +8,21 @@ A Rimworld mod that lets colonists take a drug allowed by their existing drug po
 
 ## Building from source
 
-The mod source lives under `1.6/source/` as a .NET SDK project targeting `net472`:
+Each supported RimWorld version has its own project under `<version>/source/`, and the compiled DLL goes to `<version>/Assemblies/Drugs on Duty.dll`. The `1.6` tree is kept as-is; fixes that apply to both versions need to be made in both.
+
+**RimWorld 1.6** - .NET SDK project targeting `net472`. A RimWorld install isn't required: `Krafs.Rimworld.Ref` and `Lib.Harmony.Ref` provide stub reference assemblies via NuGet.
 
 ```
-cd "1.6/source"
-dotnet build -c Release
+dotnet build "1.6/source/Drugs on Duty.csproj" -c Release
 ```
 
-The compiled DLL is written to `1.6/Assemblies/Drugs on Duty.dll`. A working Rimworld install isn't required to build - `Krafs.Rimworld.Ref` and `Lib.Harmony.Ref` provide stub reference assemblies via NuGet.
+**RimWorld 1.7** - .NET SDK project targeting `net10.0` (.NET SDK 10 required). It compiles against the installed game and a Harmony 3 `0Harmony.dll` rather than NuGet packages. The defaults match the author's machine; override them for yours:
+
+```
+dotnet build "1.7/source/Drugs on Duty.csproj" -c Release -p:RimWorldDir="C:\path\to\RimWorld" -p:HarmonyDll="C:\path\to\Harmony\1.7\0Harmony.dll"
+```
+
+`RimWorldDir` is the game's root folder (it holds `Assembly-CSharp.dll` and `UnityStubs.dll`). The build stops with a clear error if either path is wrong.
 
 ## License
 

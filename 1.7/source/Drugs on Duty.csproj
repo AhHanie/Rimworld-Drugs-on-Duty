@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Drugs on Duty</AssemblyName>
+    <RootNamespace>Drugs_on_Duty</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <Deterministic>true</Deterministic>
+    <LangVersion>latest</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <RimWorldDir Condition="'$(RimWorldDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\RimWorld</RimWorldDir>
+    <HarmonyDll Condition="'$(HarmonyDll)' == ''">C:\Me\Games\Rimworld\Harmony\1.7\0Harmony.dll</HarmonyDll>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(RimWorldDir)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityStubs">
+      <HintPath>$(RimWorldDir)\UnityStubs.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(HarmonyDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CheckGameReferences" BeforeTargets="ResolveAssemblyReferences;CoreCompile">
+    <Error Condition="!Exists('$(RimWorldDir)\Assembly-CSharp.dll')" Text="RimWorldDir ('$(RimWorldDir)') does not contain Assembly-CSharp.dll. Pass -p:RimWorldDir=... for this machine." />
+    <Error Condition="!Exists('$(RimWorldDir)\UnityStubs.dll')" Text="RimWorldDir ('$(RimWorldDir)') does not contain UnityStubs.dll. Pass -p:RimWorldDir=... for this machine." />
+    <Error Condition="!Exists('$(HarmonyDll)')" Text="HarmonyDll ('$(HarmonyDll)') does not exist. Pass -p:HarmonyDll=... pointing at a Harmony 3 0Harmony.dll." />
+  </Target>
+
+  <ItemGroup>
+    <Folder Include="Patches\" />
+  </ItemGroup>
+</Project>
